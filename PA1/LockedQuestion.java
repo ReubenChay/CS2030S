@@ -1,0 +1,6 @@
+
+interface LockedQuestion { 
+
+    int mark();
+
+}
