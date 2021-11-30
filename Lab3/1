@@ -1,0 +1,77 @@
+
+abstract class Rubik {
+
+    private static final int NUM_OF_FACES = 6;
+    private static final int ARRAY_LEN = 3;
+
+    private final int[][][] grid = new int[NUM_OF_FACES][ARRAY_LEN][ARRAY_LEN];
+
+    Rubik(int[][][] grid) {
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 3; j++) {
+                for (int k = 0; k < 3; k++) {
+                    this.grid[i][j][k] = grid[i][j][k];
+                }
+            }
+        }
+    }
+
+
+    abstract public Rubik right();
+
+    abstract public Rubik left();
+
+    abstract public Rubik half();
+
+    @Override
+    public String toString() {
+        String out = "";
+        String dots = "......";
+
+        for(int i = 0; i < 3; i++) {
+            out += dots;
+            for (int j = 0; j < 3; j++) {
+                out += this.grid[0][0][j];
+            }
+            out += dots;
+            out += "\n";
+        }
+        // prints top
+
+        for(int mid = 0; mid < 3; mid++) {
+            for(int first = 1; first < 4; first++) {
+                for(int last = 0; last < 3; last++) {
+                    out += this.grid[first][mid][last];
+                }
+            }
+            out += "\n";
+        }
+        // prints left, front, right
+
+        for(int i = 0; i < 3; i++) {
+            out += dots;
+            for (int j = 0; j < 3; j++) {
+                out += this.grid[4][4][j];
+            }
+            out += dots;
+            out += "\n";
+        }
+        // prints down face
+
+        for(int i = 0; i < 3; i++) {
+            out += dots;
+            for (int j = 0; j < 3; j++) {
+                out += this.grid[5][5][j];
+            }
+            out += dots;
+            out += "\n";
+        }
+        // prints back face
+    }
+}
+
+
+
+
+
+

@@ -1,0 +1,25 @@
+
+abstract class Cab {
+
+    private final String identifier; 
+    private final int waitTime;
+    CabService[] services; 
+
+    Cab(String identifier, int waitTime, CabService[] services) {
+        this.identifier = identifier; 
+        this.waitTime = waitTime; 
+        this.services = services; 
+    }
+
+    String getIdentifier() {
+        return this.identifier; 
+    }
+
+    int getWaitTime() {
+        return this.waitTime;
+    }
+
+    CabService[] getCabServices() {
+        return this.services; 
+    }
+}

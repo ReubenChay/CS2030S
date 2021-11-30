@@ -1,0 +1,69 @@
+
+class RubikFront extends Rubik {
+    private static final int FACE_NUM = 6;
+    private static final int ARRAY_LEN = 3;
+    private static final int TOP = 0;
+    private static final int LEFT = 1;
+    private static final int FRONT = 2;
+    private static final int RIGHT = 3;
+    private static final int DOWN = 4;
+    private static final int BACK = 5;
+
+    RubikFront(int[][][] grid) {
+        super(grid);
+    }
+
+
+    @Override 
+    public RubikFront right() {
+        int[][][] newGrid = new int[FACE_NUM][ARRAY_LEN][ARRAY_LEN];
+        for (int i = 0; i < FACE_NUM; i++) {
+            for (int j = 0; j < ARRAY_LEN; j++) {
+                for (int k = 0; k < ARRAY_LEN; k++) {
+                    newGrid[i][j][k] = this.getGrid(i,j,k);
+                }
+            }
+        } // copy original grid into newGrid
+
+        newGrid[TOP][FRONT][TOP] = this.getGrid(LEFT,FRONT,FRONT);
+        newGrid[TOP][FRONT][LEFT] = this.getGrid(LEFT,LEFT,FRONT);
+        newGrid[TOP][FRONT][FRONT] = this.getGrid(LEFT,TOP,FRONT);
+        newGrid[RIGHT][TOP][TOP] = this.getGrid(TOP,FRONT,TOP);
+        newGrid[RIGHT][LEFT][TOP] = this.getGrid(TOP,FRONT,LEFT);
+        newGrid[RIGHT][FRONT][TOP] = this.getGrid(TOP,FRONT,FRONT);
+        newGrid[DOWN][TOP][FRONT] = this.getGrid(LEFT,TOP,TOP);
+        newGrid[DOWN][TOP][LEFT] = this.getGrid(RIGHT,LEFT,TOP);
+        newGrid[DOWN][TOP][TOP] = this.getGrid(RIGHT,FRONT,TOP);
+        newGrid[LEFT][TOP][FRONT] = this.getGrid(DOWN,TOP,TOP);
+        newGrid[LEFT][LEFT][FRONT] = this.getGrid(DOWN,TOP,LEFT);
+        newGrid[LEFT][FRONT][FRONT] = this.getGrid(DOWN,TOP,FRONT); 
+
+        newGrid[2] = new Face(this.getFace(2)).right().toIntArray();
+        return new RubikFront(newGrid);
+
+    }
+
+    @Override 
+    public RubikFront left() {
+        RubikFront rf = this.right().right().right();
+        return rf;
+    }
+
+    @Override 
+    public RubikFront half() {
+        RubikFront rf = this.right().right();
+        return rf; 
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+

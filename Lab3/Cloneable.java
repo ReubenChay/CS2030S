@@ -1,0 +1,4 @@
+
+interface Cloneable {
+    Cloneable clone();
+}
